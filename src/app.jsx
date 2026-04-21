@@ -31,12 +31,16 @@ const MatrixView = ({ segFilter, urgFilter, onCaseClick }) => {
               return (
                 <div className="case-cell" key={u.id}>
                   {cases.length === 0 && <div style={{fontSize: 11, color: "var(--text-faint)", fontStyle: "italic", padding: "4px 6px"}}>typically none</div>}
-                  {cases.map((c, i) => (
-                    <div key={i} className={`case-chip ${u.id} ${urgDim ? "dimmed" : ""}`} onClick={() => onCaseClick && onCaseClick({seg, u, c})}>
-                      <span className="dot"></span>
-                      <span>{c}</span>
-                    </div>
-                  ))}
+                  {cases.map((c, i) => {
+                    const obj = typeof c === "string" ? { text: c } : c;
+                    return (
+                      <div key={i} className={`case-chip ${u.id} ${urgDim ? "dimmed" : ""}`} onClick={() => onCaseClick && onCaseClick({seg, u, c: obj.text})}>
+                        <span className="dot"></span>
+                        <span className="case-text">{obj.text}</span>
+                        {obj.route && <span className="case-route" title={`Typically routed to ${obj.route}`}>{obj.route}</span>}
+                      </div>
+                    );
+                  })}
                 </div>
               );
             })}

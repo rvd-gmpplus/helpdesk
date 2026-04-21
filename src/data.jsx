@@ -3,8 +3,8 @@
 const SEGMENTS = [
   { id: "prospect",   name: "Prospect",           desc: "Not yet a customer, info request", icon: "help_outline", color: "#8c81bf" },
   { id: "becoming",   name: "Becoming",           desc: "In application / onboarding",       icon: "how_to_reg",   color: "#6859A7" },
-  { id: "certified",  name: "Certified company",  desc: "Existing member, 19k+ worldwide",   icon: "verified",     color: "#38B769" },
-  { id: "cb",         name: "Certification Body", desc: "Auditor, 36 CBs globally",         icon: "gavel",        color: "#2fa35d" },
+  { id: "certified",  name: "Certified company",  desc: "Existing member, part of the global GMP+ community", icon: "verified", color: "#38B769" },
+  { id: "cb",         name: "Certification Body", desc: "Auditor, global network of CBs",   icon: "gavel",        color: "#2fa35d" },
   { id: "consultant", name: "Consultant / Partner", desc: "Advisor acting on behalf of member", icon: "diversity_3", color: "#EA8004" },
   { id: "regulator",  name: "Regulator / Authority", desc: "NVWA, FAVV, national authority", icon: "account_balance", color: "#4a3d84" },
   { id: "ews",        name: "Anonymous / EWS",    desc: "Whistleblower, Early Warning System", icon: "shield",     color: "#c84b4b" },
@@ -43,26 +43,27 @@ const MATRIX = {
     ],
     info: [
       "Onboarding roadmap & checklist",
-      "Sample templates (HACCP, supplier list)",
+      "Guidance on HACCP and supplier assessment (Academy, TS documents)",
     ],
   },
   certified: {
     critical: [
       "Login to portal not working",
-      "Certificate status shows 'suspended', why?",
-      "EWS incident at my facility, how to notify?",
+      { text: "Certificate status shows 'suspended', why?", route: "CB" },
+      { text: "EWS incident at my facility, what is the notification procedure?", route: "CB" },
     ],
     standard: [
       "Certificate expiring, renewal process",
-      "Request exemption (Country Note / derogation)",
+      "Does a Country Note apply to my situation?",
+      { text: "Request an individual derogation", route: "Scheme" },
       "Change of scope / additional activity",
       "Invoice question, payment reminder",
-      "Risk assessment method clarification",
+      { text: "Risk assessment methodology / FSP database question", route: "FSP" },
     ],
     info: [
-      "Where is latest B1 / B2 / BA10 document?",
+      "Where do I find the latest scheme documents (R / TS / MI)?",
       "Training opportunities, Academy",
-      "Upcoming scheme changes (v7.x)",
+      "Upcoming scheme changes",
     ],
   },
   cb: {
@@ -71,10 +72,10 @@ const MATRIX = {
       "Urgent accreditation / scope question",
     ],
     standard: [
-      "Interpretation of rule AR-014 / AR-074",
+      "Scheme rule interpretation (R / TS / MI)",
       "Upload audit result rejected by validation",
-      "Transfer of certificate between CBs",
-      "Nonconformity classification unclear",
+      "Change of Certification Body (CB switch) procedure",
+      { text: "Nonconformity classification unclear", route: "Scheme" },
     ],
     info: [
       "Calendar of scheme updates",
@@ -99,7 +100,7 @@ const MATRIX = {
     ],
     standard: [
       "Verify certificate status of company Y",
-      "Scheme equivalence / recognition question",
+      { text: "Scheme equivalence / recognition question", route: "Scheme" },
     ],
     info: [
       "Annual statistics, published reports",
@@ -175,7 +176,7 @@ const LANES = [
       trigger:  [],
       channel:  ["Phone", "Email, info@gmpplus.org", "Web form / portal"],
       intake:   ["Phone IVR", "Ticket created (email-to-ticket)", "Portal form"],
-      self:     ["gmpplus.org FAQ", "Scheme library (B1/B2/BA10)", "Academy"],
+      self:     ["gmpplus.org FAQ", "Scheme library (R/TS/MI)", "Academy"],
       triage:   ["Ticket in queue", "Categorisation rules"],
       handle:   ["Email thread", "Phone callback"],
       escalate: ["Internal handoff", "Specialist call"],
@@ -313,7 +314,7 @@ const GOALS = [
   {
     n: 2,
     label: "Goal 2",
-    title: "10% fewer cases through 1–3 improvements",
+    title: "10% fewer cases through 1-3 improvements",
     strategy: "Proactive information provision driven by customer feedback (outside-in): identify recurring questions, address the root cause, and publish information before customers need to ask.",
     measures: [
       "Case volume trend (monthly, YoY)",
