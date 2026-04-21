@@ -44,25 +44,34 @@ const MATRIX = {
     info: [
       "Onboarding roadmap & checklist",
       "Guidance on HACCP and supplier assessment (Academy, TS documents)",
+      "Multi Site setup, how does it work?",
     ],
   },
   certified: {
     critical: [
       "Login to portal not working",
       { text: "Certificate status shows 'suspended', why?", route: "CB" },
-      { text: "EWS incident at my facility, what is the notification procedure?", route: "CB" },
+      { text: "EWS notification from my facility (participant route via CB)", route: "CB" },
     ],
     standard: [
       "Certificate expiring, renewal process",
       "Does a Country Note apply to my situation?",
       { text: "Request an individual derogation", route: "Scheme" },
+      { text: "Extension of current exemption", route: "Scheme" },
       "Change of scope / additional activity",
+      "Multi Site certificate question (add or remove site)",
+      "Monitoring database, result or upload question",
+      { text: "Gatekeeper / purchase from non-certified supplier", route: "Scheme" },
+      "Transport of feed question (IDTF, previous cargo)",
+      { text: "Feed material not on Product list, what next?", route: "FSP" },
       "Invoice question, payment reminder",
       { text: "Risk assessment methodology / FSP database question", route: "FSP" },
     ],
     info: [
       "Where do I find the latest scheme documents (R / TS / MI)?",
       "Training opportunities, Academy",
+      "Academy account, login or course enrolment",
+      { text: "How does the EWS procedure work (participant to CB to GMP+)?", route: "CB" },
       "Upcoming scheme changes",
     ],
   },
@@ -70,12 +79,16 @@ const MATRIX = {
     critical: [
       "Auditor portal down during audit",
       "Urgent accreditation / scope question",
+      { text: "Gatekeeper protocol deviation, urgent interpretation", route: "Scheme" },
     ],
     standard: [
       "Scheme rule interpretation (R / TS / MI)",
       "Upload audit result rejected by validation",
       "Change of Certification Body (CB switch) procedure",
       { text: "Nonconformity classification unclear", route: "Scheme" },
+      { text: "(Deputy) coordinator or auditor qualification", route: "Scheme" },
+      "Multi Site audit structure question",
+      "IDTF classification of a product",
     ],
     info: [
       "Calendar of scheme updates",
@@ -88,6 +101,7 @@ const MATRIX = {
       "Access on behalf of client, delegation",
       "Scope interpretation for client X",
       "Batch scope change for multiple clients",
+      { text: "Gatekeeper / purchase scope question for client", route: "Scheme" },
     ],
     info: [
       "Training, consultant qualification",
@@ -259,17 +273,26 @@ const LANES = [
     id: "pains", name: "Pain points", icon: "error",
     cells: {
       trigger:  [],
-      channel:  [{pain: "Unclear which channel fits best"}],
-      intake:   [{pain: "Login issues recur, repeat contact"}],
+      channel:  [
+        {pain: "Unclear which channel fits best"},
+        {pain: "Portal login accepts @gmail.com and cert-number typos, grants access to wrong company"},
+      ],
+      intake:   [
+        {pain: "Login issues recur, repeat contact"},
+        {pain: "Email contact gets no auto-acknowledgement (only web form does)"},
+      ],
       self:     [{pain: "FAQ outdated / hard to find"}],
       triage:   [{pain: "Manual routing, inconsistent categorisation"}],
-      handle:   [{pain: "Knowledge scattered, answers differ per agent"}],
+      handle:   [
+        {pain: "Knowledge scattered, answers differ per agent"},
+        {pain: "Case cannot be forwarded to expert in CRM, requires separate email"},
+      ],
       escalate: [{pain: "Customer must re-explain, context lost"}],
       resolve:  [{pain: "Ageing > 3 days not always visible"}],
       followup: [{pain: "No systematic check-in on older cases"}],
       feedback: [{pain: "CSAT response rate low"}],
       capture:  [{pain: "Insights not fed back into FAQ"}],
-      close:    [],
+      close:    [{pain: "Customer not informed when case is closed due to missing info"}],
     }
   },
   {
@@ -315,15 +338,17 @@ const GOALS = [
     n: 2,
     label: "Goal 2",
     title: "10% fewer cases through 1-3 improvements",
-    strategy: "Proactive information provision driven by customer feedback (outside-in): identify recurring questions, address the root cause, and publish information before customers need to ask.",
+    strategy: "Proactive information provision driven by customer feedback (outside-in): identify recurring questions, address the root cause, and publish information before customers need to ask. Concrete 2026 focus: bring down the 9% case-cancellation rate (73% on Risk Assessment, 46% on Exemptions, 36% on EWS) via root-cause analysis of those categories, since cancelled cases are pure waste.",
     measures: [
       "Case volume trend (monthly, YoY)",
       "% repeated / recurring question types",
       "Self-service usage (FAQ / portal hits)",
       "Customer satisfaction (CSAT) per channel",
+      "Case cancellation rate per category (2025 baseline: 9% overall; 73% Risk Assessment, 46% Exemptions, 36% EWS)",
     ],
     actions: [
       { tag: "Q1", text: "Analyse top-10 recurring questions (VOC)" },
+      { tag: "Q1", text: "Deep-dive: why are so many Risk Assessment and Exemption cases cancelled?" },
       { tag: "Q2", text: "Root cause analysis on top-3 question categories" },
       { tag: "Q3", text: "Publish proactive FAQ / self-service content" },
       { tag: "Q4", text: "Set up VOC feedback loop (periodic analysis)" },
