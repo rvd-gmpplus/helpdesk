@@ -246,8 +246,8 @@ const App = () => {
             <h1>One journey for every caller: <strong>prospect, member, auditor and regulator.</strong></h1>
             <p className="sub">Tailored to the GMP+ Helpdesk (one coordinator, two first line and one second line agent). Mapped across seven customer segments and three urgency bands, with our three 2026 goals woven into the flow.</p>
             <div className="meta">
-              <div className="item"><div className="k">Owner</div><div className="v">Rick van Dijk, IT Lead</div></div>
-              <div className="item"><div className="k">Contributors</div><div className="v">Joris de Gooier, Martin van den Bedum</div></div>
+              <div className="item"><div className="k">Owner</div><div className="v">Rick van Dijk</div></div>
+              <div className="item"><div className="k">Contributors</div><div className="v">Joris de Gooier, Martin van den Bedum, Gosia Lesko, Agnes van der Zanden, Wenxin Guo</div></div>
               <div className="item"><div className="k">Audience</div><div className="v">Helpdesk team, internal only</div></div>
               <div className="item"><div className="k">Version</div><div className="v">v1.0, April 2026</div></div>
             </div>
