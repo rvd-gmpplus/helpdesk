@@ -51,7 +51,7 @@ const MatrixView = ({ segFilter, urgFilter, onCaseClick }) => {
   );
 };
 
-const StagesView = ({ activeStage, onStageClick }) => {
+const StagesView = ({ activeStage, onStageClick, setSegFilter }) => {
   return (
     <div className="stages-wrap">
       <div className="stages-header-bar">
@@ -75,7 +75,7 @@ const StagesView = ({ activeStage, onStageClick }) => {
             const cls = `lane-cell ${!v || (Array.isArray(v) && v.length === 0) ? "empty" : ""} ${isActive ? "focus-col" : ""}`;
             return (
               <div className={cls} key={s.id}>
-                {renderLaneCell(lane.id, v)}
+                {renderLaneCell(lane.id, v, setSegFilter)}
               </div>
             );
           })}
@@ -85,8 +85,30 @@ const StagesView = ({ activeStage, onStageClick }) => {
   );
 };
 
-function renderLaneCell(laneId, v) {
+function renderLaneCell(laneId, v, setSegFilter) {
   if (!v || (Array.isArray(v) && v.length === 0)) return null;
+
+    if (laneId === "segActive") {
+      return (
+        <div className="seg-disc-row">
+          {v.map((segId, i) => {
+            const seg = SEGMENTS.find(s => s.id === segId);
+            if (!seg) return null;
+            return (
+              <span
+                key={i}
+                className="seg-disc"
+                style={{ color: seg.color, borderColor: seg.color }}
+                title={seg.name}
+                onClick={() => setSegFilter && setSegFilter(seg.id)}
+              >
+                <MIcon name={seg.icon} size={12}/>
+              </span>
+            );
+          })}
+        </div>
+      );
+    }
 
   if (laneId === "feel") {
     if (!v) return null;
@@ -316,7 +338,7 @@ const App = () => {
       </main>
 
       <div className="stages-section-wide">
-        <StagesView activeStage={activeStage} onStageClick={id => setActiveStage(activeStage === id ? null : id)}/>
+        <StagesView activeStage={activeStage} onStageClick={id => setActiveStage(activeStage === id ? null : id)} setSegFilter={setSegFilter}/>
       </div>
 
       <main className="main" style={{paddingTop: 0}}>
