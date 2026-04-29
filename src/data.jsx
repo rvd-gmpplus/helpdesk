@@ -1,8 +1,8 @@
 // Helpdesk Customer Journey, data model
 
 const SEGMENTS = [
-  { id: "prospect",   name: "Prospect",           desc: "Not yet a customer, info request", icon: "help_outline", color: "#8c81bf" },
-  { id: "becoming",   name: "Becoming",           desc: "In application / onboarding",       icon: "how_to_reg",   color: "#6859A7" },
+  { id: "prospect",   name: "Exploring",          desc: "Not yet a customer, info request", icon: "help_outline", color: "#8c81bf" },
+  { id: "becoming",   name: "Onboarding",         desc: "In application / onboarding",       icon: "how_to_reg",   color: "#6859A7" },
   { id: "certified",  name: "Certified company",  desc: "Existing member, part of the global GMP+ community", icon: "verified", color: "#38B769" },
   { id: "cb",         name: "Certification Body", desc: "Auditor, global network of CBs",   icon: "gavel",        color: "#2fa35d" },
   { id: "consultant", name: "Consultant / Partner", desc: "Advisor acting on behalf of member", icon: "diversity_3", color: "#EA8004" },
