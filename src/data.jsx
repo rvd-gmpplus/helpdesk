@@ -187,8 +187,8 @@ const LANES = [
   {
     id: "channels", name: "Channels & touchpoints", icon: "share",
     cells: {
-      trigger:  [],
-      channel:  ["Phone", "Email, info@gmpplus.org", "Web form / portal"],
+      trigger:  ["GMP+ colleague / expert (direct email, to be rerouted)"],
+      channel:  ["Phone", "Email, info@gmpplus.org", "Web form / portal", "GMP+ colleague / expert (direct email, to be rerouted)"],
       intake:   ["Phone IVR", "Ticket created (email-to-ticket)", "Portal form"],
       self:     ["gmpplus.org FAQ", "Scheme library (R/TS/MI)", "Academy"],
       triage:   ["Ticket in queue", "Categorisation rules"],
@@ -239,7 +239,7 @@ const LANES = [
     id: "departments", name: "GMP+ departments", icon: "apartment",
     cells: {
       trigger:  [],
-      channel:  [{dept: "Marketing"}, {dept: "IT"}],
+      channel:  [{dept: "Helpdesk"}, {dept: "Marketing"}, {dept: "IT"}],
       intake:   [{dept: "Helpdesk"}],
       self:     [{dept: "Marketing"}, {dept: "Scheme"}],
       triage:   [{dept: "Helpdesk"}],
@@ -256,8 +256,8 @@ const LANES = [
     id: "third", name: "Third parties", icon: "groups",
     cells: {
       trigger:  [],
-      channel:  [],
-      intake:   [],
+      channel:  [{third: "Consultant"}],
+      intake:   [{third: "Consultant"}],
       self:     [],
       triage:   [],
       handle:   [{third: "CB"}, {third: "Consultant"}],
