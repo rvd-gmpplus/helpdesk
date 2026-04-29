@@ -168,6 +168,23 @@ const LANES = [
     }
   },
   {
+    id: "segActive", name: "Segments active", icon: "groups",
+    cells: {
+      trigger:  ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      channel:  ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      intake:   ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      self:     ["prospect", "becoming", "certified", "cb", "consultant"],
+      triage:   ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      handle:   ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      escalate: ["becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      resolve:  ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+      followup: ["becoming", "certified", "cb", "consultant"],
+      feedback: ["becoming", "certified", "cb", "consultant"],
+      capture:  [],
+      close:    ["prospect", "becoming", "certified", "cb", "consultant", "regulator", "ews"],
+    }
+  },
+  {
     id: "feel", name: "Thoughts & feelings", icon: "psychology",
     cells: {
       trigger:  { feel: "neu", emoji: "🤔", note: "\"Who can help me?\"" },
