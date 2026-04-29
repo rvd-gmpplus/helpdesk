@@ -22,6 +22,169 @@
 
 No file splitting. Existing files stay focused; we are adding to each one's existing responsibility.
 
+In addition (added per follow-up review): a minimal **Vitest + React Testing Library + jsdom** test runner is introduced in Task 0 so subsequent tasks can verify behaviour automatically. The deployed page continues to load via Babel-standalone in `index.html`, untouched. Test files live alongside source as `src/*.test.jsx`.
+
+---
+
+## Task 0: Set up Vitest, React Testing Library, jsdom, and a CI workflow
+
+**Files:**
+- Create: `package.json`
+- Create: `vitest.config.js`
+- Create: `src/test-setup.js`
+- Create: `src/data.test.jsx`
+- Create: `.github/workflows/test.yml`
+- Create: `.gitignore`
+
+- [ ] **Step 1: Create `.gitignore`.**
+
+```
+node_modules/
+coverage/
+.vitest-cache/
+```
+
+- [ ] **Step 2: Create `package.json`.**
+
+```json
+{
+  "name": "helpdesk-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/react": "^16.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "jsdom": "^24.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "vitest": "^2.0.0"
+  }
+}
+```
+
+- [ ] **Step 3: Create `vitest.config.js`.**
+
+```js
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: "jsdom",
+    setupFiles: ["./src/test-setup.js"],
+    globals: true,
+    include: ["src/**/*.test.{js,jsx}"],
+  },
+  esbuild: {
+    loader: "jsx",
+    include: /src\/.*\.jsx?$/,
+  },
+});
+```
+
+- [ ] **Step 4: Create `src/test-setup.js`.**
+
+```js
+import "@testing-library/jest-dom/vitest";
+```
+
+- [ ] **Step 5: Create `src/data.test.jsx` with data-invariant tests.** Note that the existing `src/data.jsx` ends with `Object.assign(window, ...)` and does not use ES module exports. To make it testable, the test file imports the module via a small loader that runs the file as a side-effect script and reads from `globalThis`. Use this content:
+
+```jsx
+import { describe, it, expect, beforeAll } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+beforeAll(async () => {
+  const src = fs.readFileSync(path.join(__dirname, "data.jsx"), "utf8");
+  // Execute as a script so the trailing Object.assign(window, {...}) populates globalThis.
+  // window === globalThis in jsdom.
+  // eslint-disable-next-line no-new-func
+  new Function(src)();
+});
+
+describe("data model invariants", () => {
+  it("every MATRIX key is a valid SEGMENTS id", () => {
+    const ids = new Set(globalThis.SEGMENTS.map(s => s.id));
+    for (const key of Object.keys(globalThis.MATRIX)) {
+      expect(ids.has(key)).toBe(true);
+    }
+  });
+
+  it("every STAGES id has an entry in every lane's cells", () => {
+    const stageIds = globalThis.STAGES.map(s => s.id);
+    for (const lane of globalThis.LANES) {
+      for (const id of stageIds) {
+        expect(lane.cells, `lane ${lane.id} missing cells`).toBeDefined();
+        expect(id in lane.cells, `lane ${lane.id} missing stage ${id}`).toBe(true);
+      }
+    }
+  });
+
+  it("URGENCIES are exactly critical / standard / info", () => {
+    const ids = globalThis.URGENCIES.map(u => u.id).sort();
+    expect(ids).toEqual(["critical", "info", "standard"]);
+  });
+});
+```
+
+- [ ] **Step 6: Create `.github/workflows/test.yml`.**
+
+```yaml
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm install
+      - run: npm test
+```
+
+- [ ] **Step 7: Install dependencies.**
+
+```bash
+npm install
+```
+
+Expected: `node_modules/` populated, no errors.
+
+- [ ] **Step 8: Run the test suite.**
+
+```bash
+npm test
+```
+
+Expected: 3 tests pass in `src/data.test.jsx`. If any fail, fix the data file or the test before continuing.
+
+- [ ] **Step 9: Commit.**
+
+```bash
+git add package.json package-lock.json vitest.config.js src/test-setup.js src/data.test.jsx .github/workflows/test.yml .gitignore
+git commit -m "Add Vitest test runner, data-invariant tests, and CI workflow"
+```
+
 ---
 
 ## Task 1: Rename Prospect and Becoming labels
