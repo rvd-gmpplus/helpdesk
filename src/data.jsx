@@ -394,4 +394,26 @@ const GOALS = [
   },
 ];
 
-Object.assign(window, { SEGMENTS, URGENCIES, MATRIX, STAGES, LANES, GOALS });
+const MEETING_OUTCOMES = {
+  decisions: [
+    { status: "decision", text: "Auto-reply for emails: confirms receipt and 3-working-day response message." },
+    { status: "decision", text: "Phone IVR opening message: urgent only, with instructions before the queue." },
+    { status: "decision", text: "Direct emails to GMP+ experts will be rerouted via Helpdesk alias." },
+    { status: "decision", text: "Start monitoring case volume per channel (forms, email)." },
+  ],
+  open: [
+    { status: "open_question", text: "Stage grouping not finalized." },
+    { status: "to_be_defined", text: "Customer segment terminology not final." },
+    { status: "open_question", text: "Phone-handling improvements still under discussion." },
+    { status: "open_question", text: "AI / FAQ self-service improvements still under discussion." },
+    { status: "open_question", text: "Scheme document accessibility unresolved." },
+  ],
+};
+
+const AI_INITIATIVES = [
+  { status: "exploring", text: "Auto-reply drafting assistance" },
+  { status: "exploring", text: "FAQ / self-service stress-testing with AI" },
+  { status: "exploring", text: "Phone-call pre-message and triage automation" },
+];
+
+Object.assign(window, { SEGMENTS, URGENCIES, MATRIX, STAGES, LANES, GOALS, MEETING_OUTCOMES, AI_INITIATIVES });
