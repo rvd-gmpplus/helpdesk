@@ -173,7 +173,7 @@ const LANES = [
       trigger:  { feel: "neu", emoji: "🤔", note: "\"Who can help me?\"" },
       channel:  { feel: "neu", emoji: "😐", note: "\"Which channel is fastest?\"" },
       intake:   { feel: "neu", emoji: "🙂", note: "\"Finally someone picks up\"" },
-      self:     { feel: "neg", emoji: "😕", note: "\"Where is this in the docs?\"" },
+      self:     { feel: "neg", emoji: "😕", note: "\"Where is this in the docs? How do I understand what it means?\"" },
       triage:   { feel: "neg", emoji: "😑", note: "\"Hope it's the right team\"" },
       handle:   { feel: "pos", emoji: "🙂", note: "\"They understand\"" },
       escalate: { feel: "neg", emoji: "😓", note: "\"Do I have to re-explain?\"" },
@@ -281,7 +281,10 @@ const LANES = [
         {pain: "Login issues recur, repeat contact"},
         {pain: "Email contact gets no auto-acknowledgement (only web form does)"},
       ],
-      self:     [{pain: "FAQ outdated / hard to find"}],
+      self:     [
+        {pain: "FAQ outdated / hard to find"},
+        {pain: "Customers struggle to understand what the scheme requirements actually mean for them"},
+      ],
       triage:   [{pain: "Manual routing, inconsistent categorisation"}],
       handle:   [
         {pain: "Knowledge scattered, answers differ per agent"},
