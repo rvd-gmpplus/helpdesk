@@ -231,6 +231,28 @@ const MeetingOutcomes = () => {
   );
 };
 
+const ChannelMonitoringPlaceholder = () => (
+  <div className="placeholder-card">
+    <span className="placeholder-ribbon">Coming soon</span>
+    <h3><MIcon name="bar_chart" size={18}/> Cases by channel (forms, email, phone)</h3>
+    <div className="placeholder-bar"><span className="lbl">Forms</span><span className="bar"></span></div>
+    <div className="placeholder-bar"><span className="lbl">Email</span><span className="bar"></span></div>
+    <div className="placeholder-bar"><span className="lbl">Phone</span><span className="bar"></span></div>
+    <p style={{fontSize: 11, color: "#666", margin: "10px 0 0"}}>Wiring up CRM data in a follow-up pass once labels are stable.</p>
+  </div>
+);
+
+const AIInitiativesPlaceholder = () => (
+  <div className="placeholder-card">
+    <h3><MIcon name="auto_awesome" size={18}/> AI explorations</h3>
+    <ul className="ai-list">
+      {AI_INITIATIVES.map((a, i) => (
+        <li key={i}><span className={`status-pill ${a.status}`}>{a.status}</span>{a.text}</li>
+      ))}
+    </ul>
+  </div>
+);
+
 const App = () => {
   const DEF = /*EDITMODE-BEGIN*/{"mode":"interactive","density":1}/*EDITMODE-END*/;
   const [tweaks, setTweaks] = uS(() => {
@@ -384,6 +406,10 @@ const App = () => {
         <div className="section-label">Part 3</div>
         <h2 className="section-title">Three goals for 2026</h2>
         <p className="section-sub">Each goal pairs a strategy with dashboard measures and quarterly actions. Together they move the Helpdesk from reactive to proactive to automated, in that order.</p>
+        <div className="placeholder-row">
+          <ChannelMonitoringPlaceholder/>
+          <AIInitiativesPlaceholder/>
+        </div>
         <GoalsSection/>
       </main>
 
