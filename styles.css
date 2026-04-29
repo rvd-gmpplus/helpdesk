@@ -516,3 +516,9 @@ body[data-mode="poster"] .stages-header-bar .cell.active .stage-num { background
   .matrix-wrap, .stages-wrap, .goal-card { box-shadow: none; break-inside: avoid; }
   @page { size: A3 landscape; margin: 10mm; }
 }
+
+.ch-tag.warn {
+  border-color: #EA8004;
+  color: #EA8004;
+  background: #FFF4E5;
+}

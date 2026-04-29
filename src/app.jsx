@@ -101,7 +101,10 @@ function renderLaneCell(laneId, v) {
     return v.map((x, i) => <div key={i} style={{marginBottom: 3}}>{x}</div>);
   }
   if (laneId === "channels") {
-    return v.map((x, i) => <span key={i} className="ch-tag">{x}</span>);
+    return v.map((x, i) => {
+      const warn = typeof x === "string" && x.indexOf("to be rerouted") !== -1;
+      return <span key={i} className={`ch-tag${warn ? " warn" : ""}`}>{x}</span>;
+    });
   }
   if (laneId === "systems") {
     return v.map((x, i) => <span key={i} className="sys-tag">{x}</span>);
