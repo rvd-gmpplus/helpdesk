@@ -207,6 +207,30 @@ const GoalsSection = () => (
   </div>
 );
 
+const MeetingOutcomes = () => {
+  const { decisions, open } = MEETING_OUTCOMES;
+  return (
+    <div className="outcome-band">
+      <div className="outcome-card decisions">
+        <h3><MIcon name="check_circle" size={18}/> Decisions taken (28 April 2026)</h3>
+        <ul>
+          {decisions.map((d, i) => (
+            <li key={i}><span className={`status-pill ${d.status}`}>{d.status.replace("_"," ")}</span>{d.text}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="outcome-card open">
+        <h3><MIcon name="help" size={18}/> Open questions</h3>
+        <ul>
+          {open.map((d, i) => (
+            <li key={i}><span className={`status-pill ${d.status}`}>{d.status.replace("_"," ")}</span>{d.text}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const DEF = /*EDITMODE-BEGIN*/{"mode":"interactive","density":1}/*EDITMODE-END*/;
   const [tweaks, setTweaks] = uS(() => {
@@ -342,6 +366,11 @@ const App = () => {
       </div>
 
       <main className="main" style={{paddingTop: 0}}>
+
+        <div className="section-label">From the meeting</div>
+        <h2 className="section-title">28 April 2026: decisions and open questions</h2>
+        <p className="section-sub">Captured live from the helpdesk improvement meeting. Decisions are scheduled to be implemented; open questions return to the next meeting.</p>
+        <MeetingOutcomes/>
 
         <div className="legend-row">
           <span className="l-label">Legend</span>
