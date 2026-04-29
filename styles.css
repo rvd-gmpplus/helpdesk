@@ -543,3 +543,67 @@ body[data-mode="poster"] .stages-header-bar .cell.active .stage-num { background
 .seg-disc:hover {
   transform: scale(1.15);
 }
+
+.status-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.status-pill.decision {
+  background: #E5F5EC;
+  color: #38B769;
+}
+.status-pill.open_question {
+  background: #FFF4E5;
+  color: #EA8004;
+}
+.status-pill.to_be_defined {
+  background: #EEEEEE;
+  color: #666666;
+}
+.status-pill.exploring {
+  background: #E8E5F0;
+  color: #6859A7;
+}
+
+.outcome-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0 8px;
+}
+.outcome-card {
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  background: #FFFFFF;
+}
+.outcome-card.decisions { border-left: 4px solid #38B769; }
+.outcome-card.open { border-left: 4px solid #EA8004; }
+.outcome-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: #6859A7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.outcome-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.outcome-card li {
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 6px 0;
+  border-top: 1px dashed #EEEEEE;
+}
+.outcome-card li:first-child { border-top: 0; }
