@@ -607,3 +607,71 @@ body[data-mode="poster"] .stages-header-bar .cell.active .stage-num { background
   border-top: 1px dashed #EEEEEE;
 }
 .outcome-card li:first-child { border-top: 0; }
+
+.placeholder-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+.placeholder-card {
+  position: relative;
+  border: 1px dashed #B0A8D0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  background: #FAFAFC;
+}
+.placeholder-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: #6859A7;
+}
+.placeholder-ribbon {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #E8E5F0;
+  color: #6859A7;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.placeholder-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+.placeholder-bar .lbl {
+  font-size: 11px;
+  color: #666666;
+  width: 60px;
+}
+.placeholder-bar .bar {
+  flex: 1;
+  height: 14px;
+  border: 1px dashed #B0A8D0;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    #F4F2F8,
+    #F4F2F8 6px,
+    #FFFFFF 6px,
+    #FFFFFF 12px
+  );
+}
+.ai-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ai-list li {
+  font-size: 12px;
+  padding: 6px 0;
+  border-top: 1px dashed #EEEEEE;
+}
+.ai-list li:first-child { border-top: 0; }
