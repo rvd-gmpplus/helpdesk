@@ -231,16 +231,45 @@ const MeetingOutcomes = () => {
   );
 };
 
-const ChannelMonitoringPlaceholder = () => (
-  <div className="placeholder-card">
-    <span className="placeholder-ribbon">Coming soon</span>
-    <h3><MIcon name="bar_chart" size={18}/> Cases by channel (forms, email, phone)</h3>
-    <div className="placeholder-bar"><span className="lbl">Forms</span><span className="bar"></span></div>
-    <div className="placeholder-bar"><span className="lbl">Email</span><span className="bar"></span></div>
-    <div className="placeholder-bar"><span className="lbl">Phone</span><span className="bar"></span></div>
-    <p style={{fontSize: 11, color: "#666", margin: "10px 0 0"}}>Wiring up CRM data in a follow-up pass once labels are stable.</p>
-  </div>
-);
+const fmtRange = (s, e) => {
+  const opts = { day: "numeric", month: "short", year: "numeric" };
+  const sd = new Date(s).toLocaleDateString("en-GB", opts);
+  const ed = new Date(e).toLocaleDateString("en-GB", opts);
+  return `${sd} - ${ed}`;
+};
+
+const ChannelIntakeCard = () => {
+  const max = Math.max(...CHANNEL_INTAKE.channels.map(c => c.count));
+  return (
+    <div className="placeholder-card intake-card">
+      <h3><MIcon name="bar_chart" size={18}/> Cases by channel</h3>
+      <p className="intake-meta">
+        {CHANNEL_INTAKE.total.toLocaleString("en-GB")} cases | {fmtRange(CHANNEL_INTAKE.rangeStart, CHANNEL_INTAKE.rangeEnd)} | source: {CHANNEL_INTAKE.source}
+      </p>
+      <div className="intake-list">
+        {CHANNEL_INTAKE.channels.map(ch => (
+          <div className={`intake-row ch-${ch.id}`} key={ch.id}>
+            <div className="intake-head">
+              <span className="intake-name"><MIcon name={ch.icon} size={14}/> {ch.name}</span>
+              <span className="intake-num">
+                <strong>{ch.count.toLocaleString("en-GB")}</strong>
+                <span className="intake-pct">{ch.pct}%</span>
+              </span>
+            </div>
+            <div className="intake-bar-track">
+              <span className="intake-bar-fill" style={{ width: `${(ch.count / max) * 100}%` }}/>
+            </div>
+            <ul className="intake-types">
+              {ch.topTypes.map((t, i) => (
+                <li key={i}><span className="t-name" title={t.name}>{t.name}</span><span className="t-count">{t.count.toLocaleString("en-GB")}</span></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const AIInitiativesPlaceholder = () => (
   <div className="placeholder-card">
@@ -320,7 +349,7 @@ const App = () => {
               <div className="item"><div className="k">Owner</div><div className="v">Rick van Dijk</div></div>
               <div className="item"><div className="k">Contributors</div><div className="v">Joris de Gooier, Martin van den Bedum, Gosia Lesko, Agnes van der Zanden, Wenxin Guo</div></div>
               <div className="item"><div className="k">Audience</div><div className="v">Helpdesk team, internal only</div></div>
-              <div className="item"><div className="k">Version</div><div className="v">v1.0, April 2026</div></div>
+              <div className="item"><div className="k">Version</div><div className="v">V2.0, May 1st, 2026</div></div>
             </div>
           </div>
           <div className="goal-tiles">
@@ -396,18 +425,18 @@ const App = () => {
 
         <div className="legend-row">
           <span className="l-label">Legend</span>
-          <span className="l-item"><span className="l-sw" style={{background:"var(--gmp-purple-50)"}}></span>Lane label</span>
-          <span className="l-item"><span className="l-sw" style={{background:"var(--gmp-green-50)"}}></span>Channel tag</span>
-          <span className="l-item"><span className="l-sw" style={{background:"var(--gmp-purple-50)"}}></span>System tag</span>
-          <span className="l-item"><span className="l-sw" style={{background:"var(--gmp-orange-50)"}}></span>Moment of truth</span>
-          <span className="l-item"><span className="l-sw" style={{background:"var(--gmp-red-100)"}}></span>Pain point</span>
+          <span className="l-item"><span className="l-sw sw-lane"/>Lane label</span>
+          <span className="l-item"><span className="l-sw sw-channel"/>Channel tag</span>
+          <span className="l-item"><span className="l-sw sw-system"/>System tag</span>
+          <span className="l-item"><span className="l-sw sw-mot"/>Moment of truth</span>
+          <span className="l-item"><span className="l-sw sw-pain"/>Pain point</span>
         </div>
 
         <div className="section-label">Part 3</div>
         <h2 className="section-title">Three goals for 2026</h2>
         <p className="section-sub">Each goal pairs a strategy with dashboard measures and quarterly actions. Together they move the Helpdesk from reactive to proactive to automated, in that order.</p>
         <div className="placeholder-row">
-          <ChannelMonitoringPlaceholder/>
+          <ChannelIntakeCard/>
           <AIInitiativesPlaceholder/>
         </div>
         <GoalsSection/>

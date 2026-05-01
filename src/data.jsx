@@ -416,4 +416,46 @@ const AI_INITIATIVES = [
   { status: "exploring", text: "Phone-call pre-message and triage automation" },
 ];
 
-Object.assign(window, { SEGMENTS, URGENCIES, MATRIX, STAGES, LANES, GOALS, MEETING_OUTCOMES, AI_INITIATIVES });
+// Aggregated from the S&S monthly export (All Cases, 1 Mar 2025 to 20 Mar 2026).
+// Source: files/All Cases - S&S Monthly Report 20_3_2026 17-34-26.xlsx, column "Origin".
+// Refresh by re-running the helper script after a new export drops in.
+const CHANNEL_INTAKE = {
+  source: "S&S monthly export (All Cases)",
+  rangeStart: "2025-03-01",
+  rangeEnd: "2026-03-20",
+  total: 6772,
+  channels: [
+    {
+      id: "web", name: "Web (forms / portal)", icon: "captive_portal",
+      count: 4742, pct: 70.0,
+      topTypes: [
+        { name: "Helpdesk - Website / portal / auditor app",   count: 836 },
+        { name: "Business Request - Change Certification Body", count: 822 },
+        { name: "Business Request - Multi Site",                count: 712 },
+        { name: "Early Warning System",                          count: 499 },
+      ],
+    },
+    {
+      id: "email", name: "Email", icon: "mail",
+      count: 2019, pct: 29.8,
+      topTypes: [
+        { name: "Helpdesk - Website / portal / auditor app", count: 975 },
+        { name: "Helpdesk - Monitoring of feed",              count: 342 },
+        { name: "Helpdesk - Other / general",                  count: 177 },
+        { name: "Helpdesk - Certification requirements",      count: 155 },
+      ],
+    },
+    {
+      id: "phone", name: "Phone", icon: "call",
+      count: 11, pct: 0.2,
+      topTypes: [
+        { name: "Helpdesk - Website / portal / auditor app", count: 3 },
+        { name: "Helpdesk - Monitoring of feed",              count: 3 },
+        { name: "Helpdesk - Usage of feed material in feed",  count: 2 },
+        { name: "Helpdesk - Transport of feed",               count: 1 },
+      ],
+    },
+  ],
+};
+
+Object.assign(window, { SEGMENTS, URGENCIES, MATRIX, STAGES, LANES, GOALS, MEETING_OUTCOMES, AI_INITIATIVES, CHANNEL_INTAKE });
